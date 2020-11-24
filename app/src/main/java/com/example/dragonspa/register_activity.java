@@ -66,8 +66,8 @@ public class register_activity extends AppCompatActivity {
                                 mDatabase = FirebaseDatabase.getInstance();
                                 dbRootRef = mDatabase.getReference();
                                 Client client = new Client(userName.getText().toString(),userPhone.getText().toString());
-                                client.phoneNumber = dbRootRef.push().getKey();
-                                dbRootRef.child("clients").child(userPhone.getText().toString()).setValue(client, completionListener);
+                                String key = dbRootRef.push().getKey();
+                                dbRootRef.child("clients").child(key).setValue(client, completionListener);
                                 startActivity(new Intent(register_activity.this,MainActivity.class));
                             }else{
                                 Toast.makeText(register_activity.this,"register failed",Toast.LENGTH_LONG).show();
@@ -88,7 +88,7 @@ public class register_activity extends AppCompatActivity {
         userName = (EditText) findViewById(R.id.edUserName);
         userEmail = (EditText) findViewById(R.id.edUserEmail);
         userPassword = (EditText) findViewById(R.id.edUserPassword);
-        userPhone=(EditText)findViewById(R.id.editTextPhone);
+        userPhone = (EditText)findViewById(R.id.editTextPhone);
         register = (Button) findViewById(R.id.register);
     }
 
