@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "871273827223",
+    "firebase_url": "https://dragonspa-94a77.firebaseio.com",
+    "project_id": "dragonspa-94a77",
+    "storage_bucket": "dragonspa-94a77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:871273827223:android:b49c5035e21d9b769292d2",
+        "android_client_info": {
+          "package_name": "com.example.dragonspa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "871273827223-hf9citafvvo18o1dbcp77tqj0v7c4v9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxVotNbbo9Xxzj6ztNLOlzpCf8-nRVnBY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "871273827223-hf9citafvvo18o1dbcp77tqj0v7c4v9l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
