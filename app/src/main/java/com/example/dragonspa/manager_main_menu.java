@@ -24,21 +24,19 @@ public class manager_main_menu extends AppCompatActivity {
            //need to add correct target activity to each button
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(manager_main_menu.this,MainActivity.class));
+                startActivity(new Intent(manager_main_menu.this,product_adding.class));
             }
         });
         editAppointments.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(manager_main_menu.this,MainActivity.class));
+                startActivity(new Intent(manager_main_menu.this,appointments_editing.class));
             }
         });
         stock.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(manager_main_menu.this,MainActivity.class));
+                startActivity(new Intent(manager_main_menu.this,stock_view.class));
             }
         });
     }

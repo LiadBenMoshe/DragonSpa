@@ -11,7 +11,7 @@
         android:id="@+id/addProduct"
         android:layout_width="177dp"
         android:layout_height="81dp"
-        android:background="#8A4747"
+        android:background="#3C3F41"
         android:text="add product"
 
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"

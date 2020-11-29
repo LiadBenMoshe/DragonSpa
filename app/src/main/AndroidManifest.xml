@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DragonSpa">
-        <activity android:name=".manager_main_menu"></activity>
+        <activity android:name=".stock_view"></activity>
+        <activity android:name=".appointments_editing" />
+        <activity android:name=".product_adding" />
+        <activity android:name=".manager_main_menu" />
         <activity android:name=".Manager_login" />
         <activity android:name=".register_activity" />
         <activity android:name=".MainActivity">
