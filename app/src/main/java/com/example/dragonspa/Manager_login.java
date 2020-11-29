@@ -65,7 +65,7 @@ public class Manager_login extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(Manager_login.this,"sign in successful",Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(Manager_login.this,MainActivity.class));
+                                startActivity(new Intent(Manager_login.this,manager_main_menu.class));
                             }else{
                                 Toast.makeText(Manager_login.this,"sign in failed",Toast.LENGTH_LONG).show();
 
