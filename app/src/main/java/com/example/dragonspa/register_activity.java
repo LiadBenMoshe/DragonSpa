@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 
 public class register_activity extends AppCompatActivity {
-    private EditText userName, userEmail, userPassword,userPhone;
+    private EditText userName, userEmail, userPassword,userPhone,id;
     private Button register;
     FirebaseDatabase mDatabase;
     DatabaseReference dbRootRef;
@@ -62,12 +62,14 @@ public class register_activity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+
                                 Toast.makeText(register_activity.this,"register secssesfull",Toast.LENGTH_LONG).show();
                                 mDatabase = FirebaseDatabase.getInstance();
                                 dbRootRef = mDatabase.getReference();
                                 Client client = new Client(userName.getText().toString(),userPhone.getText().toString());
-                                client.phoneNumber = dbRootRef.push().getKey();
-                                dbRootRef.child("clients").child(userPhone.getText().toString()).setValue(client, completionListener);
+                                client.id=dbRootRef.push().getKey();
+                                id.setText(client.id);
+                                dbRootRef.child("clients").child(client.id).setValue(client, completionListener);
                                 startActivity(new Intent(register_activity.this,MainActivity.class));
                             }else{
                                 Toast.makeText(register_activity.this,"register failed",Toast.LENGTH_LONG).show();
