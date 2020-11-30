@@ -3,7 +3,8 @@ package com.example.dragonspa;
 public class Client {
     public String name;
     public String phoneNumber;
-    public String id;
+    
+
     public Client()
     {
     }
@@ -12,6 +13,7 @@ public class Client {
         this.name = name;
         this.phoneNumber=phoneNumber;
         this.id=phoneNumber;
+
 
     }
 }
