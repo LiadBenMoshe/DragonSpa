@@ -52,7 +52,7 @@ public class Manager_login extends AppCompatActivity {
 //                };
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_activity);
+        setContentView(R.layout.activity_manager_login);
         setupUIviews();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
