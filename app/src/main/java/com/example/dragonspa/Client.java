@@ -12,7 +12,7 @@ public class Client {
     {
         this.name = name;
         this.phoneNumber=phoneNumber;
-        this.id=phoneNumber;
+
 
 
     }
