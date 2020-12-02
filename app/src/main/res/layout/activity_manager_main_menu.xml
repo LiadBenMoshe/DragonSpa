@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/purple_200"
+    android:backgroundTint="@color/teal_200"
+    android:backgroundTintMode="add"
     tools:context=".manager_main_menu">
 
     <TextView
@@ -12,8 +13,9 @@
         android:layout_width="177dp"
         android:layout_height="81dp"
         android:background="#3C3F41"
-        android:text="add product"
+        android:backgroundTint="#008F1E1E"
 
+        android:text="add product"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,4 +54,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.527" />
+
+    <Button
+        android:id="@+id/driverButton"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="137dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="359dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:background="#56FFFFFF"
+        android:text="נהג"
+        android:textColor="@color/white"
+        android:textColorLink="@color/white"
+        android:textSize="29sp"
+        app:backgroundTint="#27FFFFFF"
+        app:iconTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="#FFFFFF"
+        app:strokeColor="#9FFFFFFF" />
 </androidx.constraintlayout.widget.ConstraintLayout>
