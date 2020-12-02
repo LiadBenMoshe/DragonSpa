@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Manager_login extends AppCompatActivity {
     private EditText managerEmail, managerPassword;
-    private Button login;
+    private Button login ,back;
     FirebaseDatabase mDatabase;
     DatabaseReference dbRootRef;
     private FirebaseUser manager;
@@ -88,6 +88,7 @@ public class Manager_login extends AppCompatActivity {
         managerEmail = (EditText) findViewById(R.id.managerEmail);
         managerPassword = (EditText) findViewById(R.id.managerPass);
         login = (Button) findViewById(R.id.managerLoginButton);
+        back=(Button) findViewById(R.id.goBack);
     }
 
     private Boolean validate() {
