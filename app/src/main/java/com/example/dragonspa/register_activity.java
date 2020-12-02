@@ -24,7 +24,7 @@ public class register_activity extends AppCompatActivity {
     private Button register;
     FirebaseDatabase mDatabase;
     DatabaseReference dbRootRef;
-
+    private FirebaseAuth firebaseAuth;
 
 
 
@@ -62,13 +62,12 @@ public class register_activity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-
-                                Toast.makeText(register_activity.this,"register secssesfull",Toast.LENGTH_LONG).show();
+                                Toast.makeText(register_activity.this,"register successful",Toast.LENGTH_LONG).show();
                                 mDatabase = FirebaseDatabase.getInstance();
-                                dbRootRef = mDatabase.getReference();
+                                fireBaseAuth = FirebaseAuth.getInstance();
+                                dbRootRef = mDatabase.getReference().child("clients").child(fireBaseAuth.getUid());
                                 Client client = new Client(userName.getText().toString(),userPhone.getText().toString());
-                                String key = dbRootRef.push().getKey();
-                                dbRootRef.child("clients").child(key).setValue(client, completionListener);
+                                dbRootRef.setValue(client, completionListener);
                                 startActivity(new Intent(register_activity.this,MainActivity.class));
                             }else{
                                 Toast.makeText(register_activity.this,"register failed",Toast.LENGTH_LONG).show();

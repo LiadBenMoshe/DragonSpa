@@ -2,6 +2,7 @@ package com.example.dragonspa;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Manager_login extends AppCompatActivity {
     private EditText managerEmail, managerPassword;
@@ -24,33 +28,13 @@ public class Manager_login extends AppCompatActivity {
     FirebaseDatabase mDatabase;
     DatabaseReference dbRootRef;
     private FirebaseUser manager;
+    private String mngID;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-         FirebaseAuth fireBaseAuth = FirebaseAuth.getInstance();
-        FirebaseUser manager = fireBaseAuth.getCurrentUser();
-//        if(manager != null){
-//            finish();
-//            startActivity(new Intent(Manager_login.this,MainActivity.class));
-//        }
-
- //       DatabaseReference.CompletionListener completionListener = new
-//                DatabaseReference.CompletionListener() {
-//                    @Override
-//                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference)
-//                    {
-//                        if (databaseError != null)
-//                        {
-//                            Toast.makeText(Manager_login.this,databaseError.getMessage(),Toast.LENGTH_LONG).show();
-//                        }
-//                        else
-//                        {
-//                            Toast.makeText(Manager_login.this,"Saved!!", Toast.LENGTH_LONG).show();
-//                        }
-//                    }
-//                };
-
+        FirebaseAuth fireBaseAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_login);
         setupUIviews();
@@ -64,21 +48,41 @@ public class Manager_login extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(Manager_login.this,"sign in successful",Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(Manager_login.this,manager_main_menu.class));
+                                mDatabase = FirebaseDatabase.getInstance();
+                                FirebaseUser manager = fireBaseAuth.getCurrentUser();
+                                dbRootRef = mDatabase.getReference().child("clients").child(manager.getUid());
+                                mngID = manager.getUid();
+                                Log.d("mngID", mngID);
+                                dbRootRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        boolean b = false;
+                                       // String isManager = snapshot.child(mngID).child("isManager").getValue(String.class);
+                                        Client c = snapshot.getValue(Client.class);
+                                        String s = c.isManager;
+                                        if (s.equals("00")) {
+                                            b = true;
+                                        }
+                                        if (b == true) {
+                                            Toast.makeText(Manager_login.this, "sign in successful", Toast.LENGTH_LONG).show();
+                                            startActivity(new Intent(Manager_login.this, manager_main_menu.class));
+                                        } else {
+                                            Toast.makeText(Manager_login.this, "sign in failed", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.w( "loadPost:onCancelled", error.toException());
+                                    }
+                                });
                             }else{
                                 Toast.makeText(Manager_login.this,"sign in failed",Toast.LENGTH_LONG).show();
-
                             }
                         }
                     });
-
                 }
             }
-
-
         });
-
     }
     private void setupUIviews() {
         managerEmail = (EditText) findViewById(R.id.managerEmail);
