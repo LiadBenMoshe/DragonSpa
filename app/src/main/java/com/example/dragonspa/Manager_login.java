@@ -20,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class Manager_login extends AppCompatActivity {
     private EditText managerEmail, managerPassword;
-    private Button login;
+    private Button login ,back;
     FirebaseDatabase mDatabase;
     DatabaseReference dbRootRef;
     private FirebaseUser manager;
@@ -78,12 +78,19 @@ public class Manager_login extends AppCompatActivity {
 
 
         });
+       back.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View v){
+               startActivity(new Intent(Manager_login.this, MainActivity.class));
+           }
+       });
 
     }
     private void setupUIviews() {
         managerEmail = (EditText) findViewById(R.id.managerEmail);
         managerPassword = (EditText) findViewById(R.id.managerPass);
         login = (Button) findViewById(R.id.managerLoginButton);
+        back=(Button) findViewById(R.id.goBack);
     }
 
     private Boolean validate() {
