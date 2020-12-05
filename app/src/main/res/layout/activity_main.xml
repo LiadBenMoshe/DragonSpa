@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/pool"
     tools:context=".MainActivity">
 
     <TextView
@@ -11,14 +12,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="לקוח חדש? הירשם!"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.623" />
+        app:layout_constraintVertical_bias="0.767" />
 
     <EditText
         android:id="@+id/ExistUserEmail"
@@ -26,6 +28,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Email"
+        android:textColorHint="@color/white"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/newClient"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +43,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
+        android:textColorHint="@color/white"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/newClient"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,10 +69,14 @@
         android:layout_width="74dp"
         android:layout_height="33dp"
         android:text="מנהל"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="22sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newClient" />
+        app:layout_constraintTop_toBottomOf="@+id/newClient"
+        app:layout_constraintVertical_bias="0.297" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
