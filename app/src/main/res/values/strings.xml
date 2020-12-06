@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">DragonSpa</string>
+    <string name="stock">stock</string>
+    <string name="add_product">add product</string>
+    <string name="edit_appointments">edit appointments</string>
+    <string name="todo">TODO</string>
 </resources>

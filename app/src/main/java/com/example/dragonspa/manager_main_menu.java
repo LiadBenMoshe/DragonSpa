@@ -21,7 +21,6 @@ public class manager_main_menu extends AppCompatActivity {
         setContentView(R.layout.activity_manager_main_menu);
         setupUIviews();
         addProduct.setOnClickListener(new View.OnClickListener() {
-           //need to add correct target activity to each button
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(manager_main_menu.this,product_adding.class));
