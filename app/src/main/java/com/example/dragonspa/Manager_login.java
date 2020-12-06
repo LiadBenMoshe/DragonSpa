@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Manager_login extends AppCompatActivity {
     private EditText managerEmail, managerPassword;
-    private Button login ,back;
+    private Button login;
     FirebaseDatabase mDatabase;
     DatabaseReference dbRootRef;
     private FirebaseUser manager;
@@ -38,6 +38,7 @@ public class Manager_login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_login);
         setupUIviews();
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,7 +58,6 @@ public class Manager_login extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         boolean b = false;
-                                       // String isManager = snapshot.child(mngID).child("isManager").getValue(String.class);
                                         Client c = snapshot.getValue(Client.class);
                                         String s = c.isManager;
                                         if (s.equals("00")) {
@@ -88,7 +88,6 @@ public class Manager_login extends AppCompatActivity {
         managerEmail = (EditText) findViewById(R.id.managerEmail);
         managerPassword = (EditText) findViewById(R.id.managerPass);
         login = (Button) findViewById(R.id.managerLoginButton);
-        back=(Button) findViewById(R.id.goBack);
     }
 
     private Boolean validate() {

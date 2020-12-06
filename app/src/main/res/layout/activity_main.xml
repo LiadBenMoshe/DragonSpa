@@ -58,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:layout_marginBottom="32dp"
+        android:backgroundTint="#701A0845"
         android:text="הכנס"
         app:layout_constraintBottom_toTopOf="@+id/newClient"
         app:layout_constraintEnd_toEndOf="parent"
