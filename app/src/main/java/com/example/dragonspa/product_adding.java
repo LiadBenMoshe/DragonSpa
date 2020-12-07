@@ -38,11 +38,11 @@ public class product_adding extends AppCompatActivity {
     ArrayList<String> arrayList=new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
     Calendar systemCalender;
-   static int year1;
-   static int month1;
-   static int  day1;
-   static int hour1;
-   static int minutes1;
+    int year1;
+    int month1;
+    int  day1;
+    int hour1;
+    int minutes1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,16 +118,28 @@ public class product_adding extends AppCompatActivity {
 //                minutes1 = systemCalender.get(Calendar.MINUTE);
                TimePickerDialog timePickerDialog = new TimePickerDialog(product_adding.this, new TimePickerDialog.OnTimeSetListener() {
                    @Override
-
                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                        hour1  = hourOfDay;
                        minutes1 = minute;
-                       Thread thread =new Thread();
+                       
+                       String s = day1+"-"+month1+"-"+year1;
+                       String s2 = "";
+                       s2 = hour1+":"+minutes1;
+                       if(hour1%10 == 0)
+                           s2 = "0"+hour1+":"+minutes1;
+                       if(minutes1%10 == 0)
+                           s2 = hour1+":0"+minutes1;
+                       if(hour1%10 == 0 && minutes1%10 == 0)
+                           s2 = "0"+hour1+":0"+minutes1;
+                       Ref  = Ref.getRoot();
+                       Ref =  Ref.child("treatments").child(keyList.get(pos)).child("times");
+                       Ref.child(s).child(s2).setValue("time");
+                       Toast.makeText(product_adding.this, "added successfully", Toast.LENGTH_LONG).show();
 
                    }
                },hour1,minutes1,true);
-
                timePickerDialog.show();
+
               DatePickerDialog datePickerDialog=new DatePickerDialog(product_adding.this, new DatePickerDialog.OnDateSetListener() {
                    @Override
                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -137,21 +149,6 @@ public class product_adding extends AppCompatActivity {
                    }
                },year1 , month1, day1);
                datePickerDialog.show();
-
-
-               String s = day1+"-"+month1+"-"+year1;
-               String s2 = "";
-               s2 = hour1+":"+minutes1;
-               if(hour1%10 == 0)
-                s2 = "0"+hour1+":"+minutes1;
-               if(minutes1%10 == 0)
-                   s2 = hour1+":0"+minutes1;
-               if(hour1%10 == 0 && minutes1%10 == 0)
-                   s2 = "0"+hour1+":0"+minutes1;
-               Ref  = Ref.getRoot();
-               Ref =  Ref.child("treatments").child(keyList.get(pos)).child("times");
-               Ref.child(s).child(s2).setValue("time");
-               Toast.makeText(product_adding.this, "added successfully", Toast.LENGTH_LONG).show();
 
            }
        });
