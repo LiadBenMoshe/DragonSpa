@@ -8,6 +8,7 @@ public class Treatment implements Serializable {
    public String nameProduct;
    public String detail;
 
+   
     public Treatment(){}
     public Treatment(long price,String name,String details){
         this.detail=details;

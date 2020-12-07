@@ -71,7 +71,6 @@ public class HomeActivity extends AppCompatActivity {
 
           @Override
           public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
           }
 
           @Override
