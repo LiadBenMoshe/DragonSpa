@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -85,7 +86,14 @@ public class HomeActivity extends AppCompatActivity {
       });
 
 
-
+      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+          @Override
+          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+              if(position==0){
+                  startActivity(new Intent(HomeActivity.this,SearchFootMas.class));
+              }
+          }
+      });
 
     }
 

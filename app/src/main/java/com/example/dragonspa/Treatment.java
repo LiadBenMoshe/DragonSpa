@@ -4,17 +4,19 @@ import java.io.Serializable;
 
 public class Treatment implements Serializable {
     public long price;
-    public static long id;
    public String nameProduct;
    public String detail;
+   //public ArrayList<Integer> times;
 
    
     public Treatment(){}
+
     public Treatment(long price,String name,String details){
         this.detail=details;
         this.price=price;
         this.nameProduct=name;
-         id+=1;
+       // times = new ArrayList<>();
+
     }
     public boolean equals(Treatment t){
         if(t.detail.equals(this.detail) && t.nameProduct.equals(this.nameProduct) && t.price == this.price){
@@ -22,7 +24,6 @@ public class Treatment implements Serializable {
         }
         return false;
     }
-    public String toString(){
-        return this.id+":"+nameProduct +"-"+price;
-    }
+    public String toString(){ return "   "+ nameProduct +"  |  " +price;}
+
 }
