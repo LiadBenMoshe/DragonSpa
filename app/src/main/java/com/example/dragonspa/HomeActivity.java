@@ -6,43 +6,43 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.ScrollView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.Tag;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
     ArrayList<Treatment> treats = new ArrayList<>();
     DatabaseReference Ref;
     FirebaseAuth mFirebaseAuth;
-
+    ScrollView scrollView;
     ListView listView;
     ArrayList<String> arrayList=new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
 
 
-    FloatingActionButton profile;
+    ImageButton profile;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        profile=findViewById(R.id.floatingActionButton);
+        profile=(ImageButton)findViewById(R.id.ActionButton);
+        scrollView=(ScrollView)findViewById(R.id.scrollView);
        // mFirebaseAuth = FirebaseAuth.getInstance();
 
         profile.setOnClickListener(new View.OnClickListener(){
@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
       Ref=FirebaseDatabase.getInstance().getReference().child("treatments");
-      listView=(ListView)findViewById(R.id.listviewtxt);
+      listView=(ListView) findViewById(R.id.ListView);
       arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
       listView.setAdapter(arrayAdapter);
       Ref.addChildEventListener(new ChildEventListener() {
