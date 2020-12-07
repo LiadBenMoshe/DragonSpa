@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DragonSpa">
-        <activity android:name=".product_adding2"></activity>
+        <activity android:name=".SearchFootMas"></activity>
+        <activity android:name=".product_adding2" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".stock_view" />

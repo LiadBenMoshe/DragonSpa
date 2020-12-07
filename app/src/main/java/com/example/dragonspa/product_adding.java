@@ -3,6 +3,7 @@ package com.example.dragonspa;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -72,11 +73,11 @@ public class product_adding extends AppCompatActivity {
 
             }
         });
-     listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
          @Override
          public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
              arrayList.remove(pos);
-             DatabaseReference item = arrayAdapter.get(pos) ;
+             DatabaseReference item = arrayAdapter.get(pos);
              item.removeValue();
              arrayAdapter.notifyDataSetChanged();
              Toast.makeText(product_adding.this, "deleted", Toast.LENGTH_LONG).show();
