@@ -6,4 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="310dp"
+        android:layout_height="121dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="209dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="273dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="187dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="210dp"
+        android:layout_marginTop="154dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="8dp"
+        android:text="הטיפולים שלי"
+        android:textSize="24sp"
+        app:drawableTint="#673AB7"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

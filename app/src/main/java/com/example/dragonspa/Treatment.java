@@ -8,6 +8,7 @@ public class Treatment implements Serializable {
    public String detail;
    //public ArrayList<Integer> times;
 
+   
     public Treatment(){}
 
     public Treatment(long price,String name,String details){
