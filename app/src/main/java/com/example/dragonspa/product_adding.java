@@ -1,5 +1,6 @@
 package com.example.dragonspa;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -96,6 +98,16 @@ public class product_adding extends AppCompatActivity {
 
             }
         });
+       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+               DatePickerDialog.
+           }
+
+           });
+
+
+
+
      listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
          @Override
          public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
