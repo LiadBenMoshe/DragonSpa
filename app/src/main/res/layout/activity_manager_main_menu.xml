@@ -15,7 +15,7 @@
         android:background="#3C3F41"
         android:backgroundTint="#008F1E1E"
 
-        android:text="add product"
+        android:text="@string/add_product"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +30,7 @@
         android:layout_width="188dp"
         android:layout_height="85dp"
         android:background="#A15656"
-        android:text="edit appointments"
+        android:text="@string/edit_appointments"
 
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/stock"
@@ -45,7 +45,7 @@
         android:layout_width="188dp"
         android:layout_height="85dp"
         android:background="#BA5A5A"
-        android:text="stock"
+        android:text="@string/stock"
 
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,23 +55,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.527" />
 
-    <Button
-        android:id="@+id/driverButton"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="137dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="359dp"
-        android:layout_marginEnd="39dp"
-        android:layout_marginRight="39dp"
-        android:background="#56FFFFFF"
-        android:text="נהג"
-        android:textColor="@color/white"
-        android:textColorLink="@color/white"
-        android:textSize="29sp"
-        app:backgroundTint="#27FFFFFF"
-        app:iconTint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="#FFFFFF"
-        app:strokeColor="#9FFFFFFF" />
 </androidx.constraintlayout.widget.ConstraintLayout>

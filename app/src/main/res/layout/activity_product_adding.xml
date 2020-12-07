@@ -4,18 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F3F0F0"
+    android:background="#9C27B0"
     android:backgroundTint="#FFFFFF"
     android:clipToPadding="false"
     tools:context=".product_adding">
 
+    <ListView
+        android:id="@+id/listviewtxt"
+        android:layout_width="413dp"
+        android:layout_height="486dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"></ListView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/addPbutton"
+        android:layout_width="71dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#0E30B5"
         android:clickable="true"
-        android:tint="#514573"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.974"
         app:srcCompat="@android:drawable/ic_menu_add"
-        tools:layout_editor_absoluteX="319dp"
-        tools:layout_editor_absoluteY="504dp" />
+        android:contentDescription="@string/todo"
+        android:focusable="true" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
