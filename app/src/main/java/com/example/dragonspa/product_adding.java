@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -108,9 +109,13 @@ public class product_adding extends AppCompatActivity {
 
 
 
+
      listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
          @Override
          public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+
              AlertDialog.Builder builder1 = new AlertDialog.Builder(product_adding.this);
              builder1.setMessage("are you sure you want to delete this item?");
              builder1.setCancelable(true);
