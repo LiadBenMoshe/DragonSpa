@@ -8,11 +8,47 @@
 
     <AutoCompleteTextView
         android:id="@+id/dateSearch"
-        android:text="תאריך רצוי לטיפול"
+        android:hint="תאריך טיפול רצוי"
         android:textSize="15sp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="20dp"
         android:drawableLeft="@drawable/ic_baseline_search_24"
         tools:ignore="MissingConstraints"></AutoCompleteTextView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.801"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateSearch"
+        app:layout_constraintVertical_bias="0.055" />
+
+    <ListView
+        android:id="@+id/searchsList"
+        android:layout_width="325dp"
+        android:layout_height="386dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.82" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="39dp"
+        android:text="חפש"
+        app:layout_constraintBottom_toTopOf="@+id/searchsList"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateSearch" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
