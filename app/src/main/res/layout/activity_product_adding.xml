@@ -11,13 +11,15 @@
 
     <ListView
         android:id="@+id/listviewtxt"
-        android:layout_width="413dp"
-        android:layout_height="486dp"
+        android:layout_width="366dp"
+        android:layout_height="451dp"
+        android:background="#661899BF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"></ListView>
+        app:layout_constraintVertical_bias="0.32"></ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addPbutton"
@@ -34,5 +36,20 @@
         app:srcCompat="@android:drawable/ic_menu_add"
         android:contentDescription="@string/todo"
         android:focusable="true" />
+
+    <TextView
+        android:id="@+id/theSpaTreats"
+        android:layout_width="239dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/the_spa_treatmetnts"
+        android:text="@string/the_spa_treatmetnts"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/listviewtxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="the spa treatmetnts" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
