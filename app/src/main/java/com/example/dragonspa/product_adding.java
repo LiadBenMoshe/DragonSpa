@@ -111,11 +111,6 @@ public class product_adding extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
 
                 systemCalender=Calendar.getInstance();
-//                year1=systemCalender.get(Calendar.YEAR);
-//                month1=systemCalender.get(Calendar.MONTH);
-//                day1=systemCalender.get(Calendar.DAY_OF_MONTH);
-//                hour1 = systemCalender.get(Calendar.HOUR_OF_DAY);
-//                minutes1 = systemCalender.get(Calendar.MINUTE);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(product_adding.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -125,12 +120,15 @@ public class product_adding extends AppCompatActivity {
                         String s = day1+"-"+month1+"-"+year1;
                         String s2 = "";
                         s2 = hour1+":"+minutes1;
-                        if(hour1%10 == 0)
-                            s2 = "0"+hour1+":"+minutes1;
-                        if(minutes1%10 == 0)
-                            s2 = hour1+":0"+minutes1;
-                        if(hour1%10 == 0 && minutes1%10 == 0)
-                            s2 = "0"+hour1+":0"+minutes1;
+                        if(hour1 < 10) {
+                            s2 = "0" + hour1 + ":" + minutes1;
+                        }
+                        if((minutes1 < 10)) {
+                            s2 = hour1 + ":0" + minutes1;
+                        }
+                        if(hour1 < 10 && minutes1 < 10){
+                            s2 = "0" + hour1 + ":0" + minutes1;
+                        }
                         Ref  = Ref.getRoot();
                         Ref =  Ref.child("treatments").child(keyList.get(pos)).child("times");
                         Ref.child(s).child(s2).setValue("time");
