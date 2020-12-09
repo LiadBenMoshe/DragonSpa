@@ -28,19 +28,17 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_action_name" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="415dp"
-        android:layout_height="526dp"
-        android:layout_marginTop="4dp"
+
+    <ListView
+        android:id="@+id/listviewtxt111"
+        android:layout_width="351dp"
+        android:layout_height="432dp"
+        android:background="#8643A0DF"
+        android:cacheColorHint="#3BC1D3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ActionButton">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.76"></ListView>
 
-        <ListView
-            android:id="@+id/ListView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,8 @@
 package com.example.dragonspa;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,8 +10,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +32,9 @@ public class Result extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
 
     ArrayList<String> keyList = new ArrayList<>();
-
+String date;
+String nameT;
+String idTreat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +44,17 @@ public class Result extends AppCompatActivity {
         tv=findViewById(R.id.textView2);
         //tv1=findViewById(R.id.textView4);
         Intent i=getIntent();
-    String date=i.getExtras().getString("f");
-        //String time=i.getExtras().getString("time");
-        tv.setText("f:"+date+"time:");
+        Bundle b = i.getExtras();
+        if(b != null) {
+             date = i.getExtras().getString("f");
+             idTreat = i.getExtras().getString("idTreat");
+             nameT = i.getExtras().getString("nameT");
+        }
         listView=findViewById(R.id.searchsList);
         arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
         listView.setAdapter(arrayAdapter);
         mRef=FirebaseDatabase.getInstance().getReference().child("treatments/times").child(date);
-        mRef.getRoot().child("treatments").child("-MNxdhX4rS7Fb-be7ZFt").child("times").child(date).addListenerForSingleValueEvent(new ValueEventListener() {
+        mRef.getRoot().child("treatments").child(idTreat).child("times").child(date).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
@@ -75,7 +78,7 @@ public class Result extends AppCompatActivity {
 
             }
         });
-        mRef.getRoot().child("treatments").child("-MNxdhX4rS7Fb-be7ZFt").child("times").child(date)
+        mRef.getRoot().child("treatments").child(idTreat).child("times").child(date)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -101,10 +104,10 @@ public class Result extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 mRef  = mRef.getRoot();
-                                mRef.child("treatments").child("-MNxdhX4rS7Fb-be7ZFt").child("times").child(date).child(keyList.get(pos)).removeValue();
+                                mRef.child("treatments").child(idTreat).child("times").child(date).child(keyList.get(pos)).removeValue();
 
                                 mRef = FirebaseDatabase.getInstance().getReference().child("appointments");
-                                Appointment.treatment app=new Appointment.treatment(firebaseAuth.getCurrentUser().getUid(),"מסאז' רגליים",date+"  "+keyList.get(pos));
+                                Appointment.treatment app=new Appointment.treatment(firebaseAuth.getCurrentUser().getUid(),nameT,date+"  "+keyList.get(pos));
                                 String key = mRef.push().getKey();
 
                                 mRef.child(key).setValue(app);

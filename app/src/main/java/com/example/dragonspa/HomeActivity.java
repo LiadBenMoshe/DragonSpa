@@ -1,26 +1,26 @@
 package com.example.dragonspa;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -30,11 +30,12 @@ public class HomeActivity extends AppCompatActivity {
     FirebaseAuth mFirebaseAuth;
     ScrollView scrollView;
     ListView listView;
-    ArrayList<String> arrayList=new ArrayList<>();
+    ArrayList<String> arrayList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
 
 
     ImageButton profile;
+    String value;
 
 
     @Override
@@ -42,62 +43,101 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        profile=(ImageButton)findViewById(R.id.ActionButton);
-        scrollView=(ScrollView)findViewById(R.id.scrollView);
-       // mFirebaseAuth = FirebaseAuth.getInstance();
+        profile = (ImageButton) findViewById(R.id.ActionButton);
+        // mFirebaseAuth = FirebaseAuth.getInstance();
 
-        profile.setOnClickListener(new View.OnClickListener(){
+        profile.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
             }
         });
+        ArrayList<String> keyList = new ArrayList<>();
+        Ref = FirebaseDatabase.getInstance().getReference().child("treatments");
+        Ref.getRoot().child("treatments")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot treat : dataSnapshot.getChildren()) {
+                            keyList.add(treat.getKey());
+                            Log.d("key", treat.getKey());
+                            // items.add(treat.getValue(String.class));
+                        }
+                    }
 
-      Ref=FirebaseDatabase.getInstance().getReference().child("treatments");
-      listView=(ListView) findViewById(R.id.ListView);
-      arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
-      listView.setAdapter(arrayAdapter);
-      Ref.addChildEventListener(new ChildEventListener() {
-          @Override
-          public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-              String value=snapshot.getValue(Treatment.class).toString();
-              arrayList.add(value);
-              arrayAdapter.notifyDataSetChanged();
-          }
-
-          @Override
-          public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-          }
-
-          @Override
-          public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-          }
-
-          @Override
-          public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-          }
-
-          @Override
-          public void onCancelled(@NonNull DatabaseError error) {
-
-          }
-      });
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        /*handle errors*/
+                    }
+                });
 
 
-      listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-          @Override
-          public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              if(position==0){
-                  startActivity(new Intent(HomeActivity.this,SearchFootMas.class));
-              }
-          }
-      });
+        Ref = FirebaseDatabase.getInstance().getReference().child("treatments");
+        listView = (ListView) findViewById(R.id.listviewtxt111);
+        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
+        listView.setAdapter(arrayAdapter);
+        Ref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                String value = snapshot.getValue(Treatment.class).toString();
+                arrayList.add(value);
+                arrayAdapter.notifyDataSetChanged();
+            }
 
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String idTreat = keyList.get(position);
+                Intent i = new Intent(HomeActivity.this, SearchFootMas.class);
+                i.putExtra("idTreat", idTreat);
+                Ref.getRoot();
+                Ref = Ref.child("treatments").child(idTreat).child("nameProduct");
+                Ref.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot == null) {
+                            Log.d("cccc" , "its a null!!" );
+                        }
+                        value = snapshot.getValue().toString();
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+
+
+                });
+                Log.d("value","+++" + value);
+                i.putExtra("nameT", value);
+                startActivity(i);
+
+            }
+
+
+        });
     }
-
-
-
-
 }

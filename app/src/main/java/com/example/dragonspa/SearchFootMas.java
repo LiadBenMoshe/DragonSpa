@@ -1,44 +1,25 @@
 package com.example.dragonspa;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Set;
 
 public class SearchFootMas extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     Button search,gotoResult;
     TextView displayDate;
-
+    String idTreat ="";
+    String nameT;
     String date;
     DatabaseReference Ref;
 
@@ -53,8 +34,12 @@ public class SearchFootMas extends AppCompatActivity implements DatePickerDialog
         displayDate = findViewById(R.id.textView);
 
         gotoResult=findViewById(R.id.textView3);
-
-
+        Intent i = getIntent();
+        Bundle b =i.getExtras();
+        if(b  != null) {
+             idTreat = b.getString("idTreat");
+             nameT = b.getString("nameT");
+        }
 
 
         Ref=FirebaseDatabase.getInstance().getReference("treatments/times");
@@ -80,9 +65,12 @@ public class SearchFootMas extends AppCompatActivity implements DatePickerDialog
            @Override
            public void onClick(View v) {
 
-                   Intent i=new Intent(SearchFootMas.this,Result.class);
+               Intent i=new Intent(SearchFootMas.this,Result.class);
                i.putExtra("f",date);
+               i.putExtra("idTreat" , idTreat);
+               i.putExtra("nameT",nameT);
                    startActivity(i);
+
                /* Ref=FirebaseDatabase.getInstance().getReference().child("treatments/times").child(date);
                Ref.getRoot().child("treatments").child("-MNxdhX4rS7Fb-be7ZFt").child("times").child(date).addListenerForSingleValueEvent(new ValueEventListener() {
                    @Override
