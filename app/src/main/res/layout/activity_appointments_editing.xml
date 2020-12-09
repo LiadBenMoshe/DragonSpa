@@ -11,13 +11,15 @@
 
     <ListView
         android:id="@+id/listviewtxt2"
-        android:layout_width="387dp"
-        android:layout_height="488dp"
+        android:layout_width="351dp"
+        android:layout_height="432dp"
+        android:background="#8643A0DF"
+        android:cacheColorHint="#3BC1D3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"></ListView>
+        app:layout_constraintVertical_bias="0.409"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addAppointmentButton"
@@ -34,5 +36,16 @@
         app:srcCompat="@android:drawable/ic_menu_add"
         android:contentDescription="@string/todo"
         android:focusable="true" />
+
+    <TextView
+        android:id="@+id/editApnt"
+        android:layout_width="157dp"
+        android:layout_height="39dp"
+        android:text="@string/edit_appointments"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/listviewtxt2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
