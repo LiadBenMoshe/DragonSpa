@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,20 +36,13 @@ import java.util.Calendar;
 import java.util.Set;
 
 public class SearchFootMas extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    AutoCompleteTextView search;
-    TextView display,gotoResult;
+    Button search,gotoResult;
+    TextView displayDate;
 
-
-    Calendar systemCalender;
     String date;
     DatabaseReference Ref;
-    ValueEventListener valueEventListener;
-   FirebaseDatabase mFire;
 
 
-   ListView listView;
-   ArrayList<String> arrayList=new ArrayList<>();
-   ArrayAdapter <String> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +50,10 @@ public class SearchFootMas extends AppCompatActivity implements DatePickerDialog
         setContentView(R.layout.activity_search_foot_mas);
 
         search = findViewById(R.id.dateSearch);
-        display = findViewById(R.id.textView);
-        listView = findViewById(R.id.searchsList);
+        displayDate = findViewById(R.id.textView);
+
         gotoResult=findViewById(R.id.textView3);
-        arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
-        listView.setAdapter(arrayAdapter);
+
 
 
 
@@ -141,7 +134,7 @@ public class SearchFootMas extends AppCompatActivity implements DatePickerDialog
         @Override
         public void onDateSet (DatePicker view,int year, int month, int dayOfMonth){
             date = dayOfMonth + "-" + (month + 1) + "-" + year;
-            display.setText(date);
+            displayDate.setText(date);
 
 
         }

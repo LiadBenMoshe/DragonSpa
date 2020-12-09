@@ -2,11 +2,13 @@ package com.example.dragonspa;
 
 import androidx.annotation.NonNull;
 
-public class Appointment {
+import java.io.Serializable;
+
+public class Appointment implements Serializable {
 
     treatment treat;
 
-    public class treatment{
+    public static class treatment{
         String name;
         String date;
 

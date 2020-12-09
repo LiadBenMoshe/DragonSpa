@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +29,10 @@ public class Result extends AppCompatActivity {
     ListView listView;
     ArrayList<String> arrayList=new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
+    FirebaseDatabase mDatabase;
+
+    ArrayList<String> keyList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,9 +72,23 @@ public class Result extends AppCompatActivity {
 
             }
         });
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        mRef.getRoot().child("treatments").child("-MNxdhX4rS7Fb-be7ZFt").child("times").child(date)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot time : dataSnapshot.getChildren()) {
+                            keyList.add(time.getKey());
+
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        /*handle errors*/
+                    }
+                });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+            public void  onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
 
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(Result.this);
                 builder1.setMessage("זו השעה הנוחה לך?");
@@ -79,8 +98,13 @@ public class Result extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 mRef  = mRef.getRoot();
+                                mRef.child("treatments").child("-MNxdhX4rS7Fb-be7ZFt").child("times").child(date).child(keyList.get(pos)).removeValue();
 
-                                mRef.child("treatments").child("-MNxdhX4rS7Fb-be7ZFt").child("times").child(date).child(arg0.toString()).removeValue();
+                                mRef = FirebaseDatabase.getInstance().getReference().child("appointments");
+                                Appointment.treatment app=new Appointment.treatment("מסאז' רגליים",keyList.get(pos));
+                                String key=mRef.push().getKey();
+
+                                mRef.child(key).setValue(app);
                                 arrayList.remove(pos);
                                 arrayAdapter.notifyDataSetChanged();
                                 dialog.cancel();
@@ -98,7 +122,7 @@ public class Result extends AppCompatActivity {
                         });
                 AlertDialog alert11 = builder1.create();
                 alert11.show();
-                return true;
+                //return true;
             }
         });
 
