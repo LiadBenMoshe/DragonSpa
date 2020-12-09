@@ -133,6 +133,8 @@ public class product_adding extends AppCompatActivity {
                         Ref =  Ref.child("treatments").child(keyList.get(pos)).child("times");
                         Ref.child(s).child(s2).setValue("time");
                         Toast.makeText(product_adding.this, "added successfully", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(product_adding.this, product_adding.class));
+
 
                     }
                 },hour1,minutes1,true);

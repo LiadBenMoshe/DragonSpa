@@ -140,7 +140,9 @@ tv5=findViewById(R.id.textView5);
 
                                          }
                                      });
-                                Appointment app=new Appointment(firebaseAuth.getCurrentUser().getUid(),nameT,date+"  "+keyList.get(pos), userName);
+
+                                     String uid = firebaseAuth.getCurrentUser().getUid();
+                                Appointment app=new Appointment(uid,nameT,date+"  "+keyList.get(pos), userName);
                                 String key = mRef.push().getKey();
                                 mRef.getRoot();
                                 mRef = FirebaseDatabase.getInstance().getReference().child("appointments");
@@ -149,6 +151,11 @@ tv5=findViewById(R.id.textView5);
                                 arrayList.remove(pos);
                                 arrayAdapter.notifyDataSetChanged();
                                 dialog.cancel();
+                                mRef.getRoot();
+                                mRef = FirebaseDatabase.getInstance().getReference().child("clients").child(uid).child("times");
+                                mRef.child(date).child(keyList.get(pos)).setValue("time");
+
+
                                 Toast.makeText(Result.this, "התור שמור לך", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(Result.this, SearchFootMas.class));
                             }

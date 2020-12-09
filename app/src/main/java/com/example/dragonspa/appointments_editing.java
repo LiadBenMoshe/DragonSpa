@@ -34,6 +34,8 @@ public class appointments_editing extends AppCompatActivity {
     ArrayList<Treatment> treats = new ArrayList<>();
     private FloatingActionButton add;
     DatabaseReference Ref;
+    FirebaseDatabase database;
+
     ListView listView;
     ArrayList<String> arrayList=new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
@@ -43,12 +45,14 @@ public class appointments_editing extends AppCompatActivity {
     int  day1;
     int hour1;
     int minutes1;
-
+String value;
+String date;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointments_editing);
         setupUIviews();
+        database = FirebaseDatabase.getInstance();
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -163,6 +167,37 @@ public class appointments_editing extends AppCompatActivity {
                         "Yes",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                Ref = database.getReference();
+                                Ref = Ref.getRoot();
+                                Ref.child("appointments").child(keyList.get(pos)).addValueEventListener(new ValueEventListener() {
+
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if (snapshot.exists()) {
+//                                            Log.d("cccc" , snapshot.getValue(Treatment.class).getNameProduct());
+//                                            Log.d("check" , snapshot.toString() );
+                                            Log.d("checkkkk" , snapshot.toString() );
+                                            date = snapshot.child("date").getValue().toString();
+
+                                            value = snapshot.child("userId").getValue().toString();
+                                            Log.d("dateee" , "++"+date);
+                                            String[] arr = date.split("  ");
+                                            Ref  = Ref.getRoot();
+                                            Ref.child("clients").child(value).child("times").child(arr[0]).child(arr[1]).removeValue();
+
+                                        }
+                                      //  Log.d("checkfail" , snapshot.toString() );
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+
+                                });
+
                                 Ref  = Ref.getRoot();
                                 Ref.child("appointments").child(keyList.get(pos)).removeValue();
                                 keyList.remove(pos);
