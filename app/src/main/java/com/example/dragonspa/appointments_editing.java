@@ -52,7 +52,7 @@ public class appointments_editing extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(appointments_editing.this, product_adding2.class));
+                startActivity(new Intent(appointments_editing.this, appointment_editing2.class));
             }
         });
         Ref= FirebaseDatabase.getInstance().getReference().child("appointments");

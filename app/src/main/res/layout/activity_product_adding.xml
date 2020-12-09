@@ -11,15 +11,15 @@
 
     <ListView
         android:id="@+id/listviewtxt"
-        android:layout_width="366dp"
-        android:layout_height="451dp"
-        android:background="#661899BF"
+        android:layout_width="351dp"
+        android:layout_height="432dp"
+        android:background="#8643A0DF"
+        android:cacheColorHint="#3BC1D3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.32"></ListView>
+        app:layout_constraintVertical_bias="0.409"></ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addPbutton"
