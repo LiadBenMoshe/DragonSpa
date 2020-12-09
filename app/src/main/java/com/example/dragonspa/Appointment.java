@@ -1,30 +1,25 @@
 package com.example.dragonspa;
 
-public class Appointment {
+import java.io.Serializable;
 
-   public treatment treat;
+public class Appointment implements Serializable {
 
-    public class treatment{
-       public String name;
-       public String date;
-      public   String user;
+    treatment treat;
+
+    public static class treatment{
+        String name;
+        String date;
 
         treatment(){ }
-        treatment(String name,String date,String user){
+        treatment(String name,String date){
             this.name=name;
             this.date=date;
-            this.user=user;
-        }
-        public String toString(){
-            return date + " | " + name;
         }
     }
 
 
     Appointment(){ }
-    public String toString(){
-        return this.treat.toString();
-    }
+
 
 
 }

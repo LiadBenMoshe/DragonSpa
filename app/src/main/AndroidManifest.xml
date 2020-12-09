@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DragonSpa">
         <activity android:name=".appointment_editing2"></activity>
+
+        <activity android:name=".Result"></activity>
+        <activity android:name=".Bdika" />
         <activity android:name=".SearchFootMas" />
         <activity android:name=".product_adding2" />
         <activity android:name=".ProfileActivity" />

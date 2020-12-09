@@ -4,18 +4,18 @@ import java.io.Serializable;
 
 public class Treatment implements Serializable {
     public long price;
-   public String nameProduct;
-   public String detail;
-   //public ArrayList<Integer> times;
+    public String nameProduct;
+    public String detail;
+    //public ArrayList<Integer> times;
 
-   
+
     public Treatment(){}
 
     public Treatment(long price,String name,String details){
         this.detail=details;
         this.price=price;
         this.nameProduct=name;
-       // times = new ArrayList<>();
+        // times = new ArrayList<>();
 
     }
     public boolean equals(Treatment t){
