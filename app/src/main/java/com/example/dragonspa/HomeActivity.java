@@ -27,6 +27,10 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
     ArrayList<Treatment> treats = new ArrayList<>();
     DatabaseReference Ref;
+    DatabaseReference Reff;
+
+    Intent i;
+    FirebaseDatabase database;
     FirebaseAuth mFirebaseAuth;
     ScrollView scrollView;
     ListView listView;
@@ -45,6 +49,8 @@ public class HomeActivity extends AppCompatActivity {
 
         profile = (ImageButton) findViewById(R.id.ActionButton);
         // mFirebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        Reff = database.getReference().child("treatments");
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,19 +115,27 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String idTreat = keyList.get(position);
-                Intent i = new Intent(HomeActivity.this, SearchFootMas.class);
+                i = new Intent(HomeActivity.this, SearchFootMas.class);
                 i.putExtra("idTreat", idTreat);
                 Ref.getRoot();
-                Ref = Ref.child("treatments").child(idTreat).child("nameProduct");
-                Ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                Ref = Ref.child("treatments");
+                Log.d("check" , idTreat );
+
+                Reff.child(idTreat).addValueEventListener(new ValueEventListener() {
 
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot == null) {
-                            Log.d("cccc" , "its a null!!" );
+                        if (snapshot.exists()) {
+                            Log.d("cccc" , snapshot.getValue(Treatment.class).getNameProduct());
+                            Log.d("check" , snapshot.toString() );
+
+                            value = snapshot.getValue(Treatment.class).getNameProduct();
+                            i.putExtra("nameT", value);
+                            startActivity(i);
                         }
-                      //  value = snapshot.getValue().toString();
-           value = "rgr";
+                        Log.d("checkfail" , snapshot.toString() );
+
+
                     }
 
                     @Override
@@ -129,11 +143,8 @@ public class HomeActivity extends AppCompatActivity {
 
                     }
 
-
                 });
-                Log.d("value","+++" + value);
-                i.putExtra("nameT", value);
-                startActivity(i);
+
 
             }
 
