@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +31,7 @@ public class Result extends AppCompatActivity {
     ListView listView;
     ArrayList<String> arrayList=new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
-    FirebaseDatabase mDatabase;
+    FirebaseAuth firebaseAuth;
 
     ArrayList<String> keyList = new ArrayList<>();
 
@@ -37,13 +39,14 @@ public class Result extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
+        firebaseAuth= FirebaseAuth.getInstance();
 
         tv=findViewById(R.id.textView2);
         //tv1=findViewById(R.id.textView4);
         Intent i=getIntent();
     String date=i.getExtras().getString("f");
-        String time=i.getExtras().getString("time");
-        tv.setText("f:"+date+"time:"+time);
+        //String time=i.getExtras().getString("time");
+        tv.setText("f:"+date+"time:");
         listView=findViewById(R.id.searchsList);
         arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
         listView.setAdapter(arrayAdapter);
@@ -101,15 +104,15 @@ public class Result extends AppCompatActivity {
                                 mRef.child("treatments").child("-MNxdhX4rS7Fb-be7ZFt").child("times").child(date).child(keyList.get(pos)).removeValue();
 
                                 mRef = FirebaseDatabase.getInstance().getReference().child("appointments");
-                                Appointment.treatment app=new Appointment.treatment("מסאז' רגליים",keyList.get(pos));
-                                String key=mRef.push().getKey();
+                                Appointment.treatment app=new Appointment.treatment(firebaseAuth.getCurrentUser().getUid(),"מסאז' רגליים",date+"  "+keyList.get(pos));
+                                String key = mRef.push().getKey();
 
                                 mRef.child(key).setValue(app);
                                 arrayList.remove(pos);
                                 arrayAdapter.notifyDataSetChanged();
                                 dialog.cancel();
                                 Toast.makeText(Result.this, "התור שמור לך", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(Result.this, Result.class));
+                                startActivity(new Intent(Result.this, SearchFootMas.class));
                             }
                         });
 
