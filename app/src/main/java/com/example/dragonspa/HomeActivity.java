@@ -120,8 +120,8 @@ public class HomeActivity extends AppCompatActivity {
                         if (snapshot == null) {
                             Log.d("cccc" , "its a null!!" );
                         }
-                        value = snapshot.getValue().toString();
-
+                      //  value = snapshot.getValue().toString();
+           value = "rgr";
                     }
 
                     @Override

@@ -3,6 +3,7 @@ package com.example.dragonspa;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,6 +36,8 @@ public class Result extends AppCompatActivity {
 String date;
 String nameT;
 String idTreat;
+    String userName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,13 +105,45 @@ String idTreat;
                 builder1.setPositiveButton(
                         "כן",
                         new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
+                            public synchronized void onClick(DialogInterface dialog, int id) {
                                 mRef  = mRef.getRoot();
                                 mRef.child("treatments").child(idTreat).child("times").child(date).child(keyList.get(pos)).removeValue();
-
                                 mRef = FirebaseDatabase.getInstance().getReference().child("appointments");
-                                Appointment.treatment app=new Appointment.treatment(firebaseAuth.getCurrentUser().getUid(),nameT,date+"  "+keyList.get(pos));
+                                String str = firebaseAuth.getCurrentUser().getUid();
+                                mRef = mRef.getRoot();
+                                     mRef   = mRef.child("clients").child(str);
+                                     mRef.addValueEventListener(new ValueEventListener() {
+                                         @Override
+                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                             try {
+                                                 if (snapshot.getValue() != null) {
+                                                     try {
+                                                         Client c = snapshot.getValue(Client.class);
+                                                         userName = c.name;
+                                                         String n = snapshot.getValue().toString();
+                                                         Log.d("use", userName + n);
+                                                     } catch (Exception e) {
+                                                         e.printStackTrace();
+                                                     }
+                                                 }else{
+                                                     Log.d("use", userName );}
+
+                                                 }
+                                             catch (Exception e){
+                                                 e.printStackTrace();
+                                             }
+
+                                         }
+
+                                         @Override
+                                         public void onCancelled(@NonNull DatabaseError error) {
+
+                                         }
+                                     });
+                                Appointment app=new Appointment(firebaseAuth.getCurrentUser().getUid(),nameT,date+"  "+keyList.get(pos),userName);
                                 String key = mRef.push().getKey();
+                                mRef.getRoot();
+                                mRef = FirebaseDatabase.getInstance().getReference().child("appointments");
 
                                 mRef.child(key).setValue(app);
                                 arrayList.remove(pos);
