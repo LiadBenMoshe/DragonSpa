@@ -9,19 +9,19 @@ public class Appointment implements Serializable {
        public String name;
         public String date;
         public String userId;
-        public  String userName;
+        public  String userEmail;
 
 
     Appointment(){}
-    Appointment(String userId,String name,String date,String userName){
+    Appointment(String userId,String name,String date,String userEmail){
 
             this.name=name;
             this.date=date;
             this.userId=userId;
-            this.userName = userName;
+            this.userEmail = userEmail;
         }
         public String toString(){
-            return date + " " + userName;
+            return date + "\n " + userEmail;
         }
         public String getDate(){
         return date;
@@ -30,7 +30,7 @@ public class Appointment implements Serializable {
         return userId;
     }
     public String getUserName(){
-        return userName;
+        return userEmail;
     }
     public String getName(){
         return name;

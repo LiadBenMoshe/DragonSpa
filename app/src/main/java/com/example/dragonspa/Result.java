@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class Result extends AppCompatActivity {
-    TextView tv,tv5 ;
+    TextView tv ;
     DatabaseReference mRef;
     ListView listView;
     ArrayList<String> arrayList=new ArrayList<>();
@@ -36,16 +36,16 @@ public class Result extends AppCompatActivity {
 String date;
 String nameT;
 String idTreat;
-    String userName;
+    String userEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         firebaseAuth= FirebaseAuth.getInstance();
-tv5=findViewById(R.id.textView5);
+
         tv=findViewById(R.id.textView2);
-        //tv1=findViewById(R.id.textView4);
+
         Intent i=getIntent();
         Bundle b = i.getExtras();
         if(b != null) {
@@ -96,7 +96,12 @@ tv5=findViewById(R.id.textView5);
                 });
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void  onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+                if (arg0.getItemAtPosition(pos) == "אין תוצאות מתאימות") {
+                    Toast.makeText(Result.this, "חזור לבחור תאריך אחר", Toast.LENGTH_LONG).show();
+
+                }
+                else{
 
                 AlertDialog.Builder builder1 = new AlertDialog.Builder(Result.this);
                 builder1.setMessage("זו השעה הנוחה לך?");
@@ -105,44 +110,17 @@ tv5=findViewById(R.id.textView5);
                         "כן",
                         new DialogInterface.OnClickListener() {
                             public synchronized void onClick(DialogInterface dialog, int id) {
-                                mRef  = mRef.getRoot();
+                                mRef = mRef.getRoot();
                                 mRef.child("treatments").child(idTreat).child("times").child(date).child(keyList.get(pos)).removeValue();
                                 mRef = FirebaseDatabase.getInstance().getReference().child("appointments");
                                 String str = firebaseAuth.getCurrentUser().getUid();
                                 mRef = mRef.getRoot();
-                                     mRef   = mRef.child("clients").child(str);
-                                     mRef.addValueEventListener(new ValueEventListener() {
-                                         @Override
-                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                             try {
-                                                 if (snapshot.getValue(Client.class) != null) {
-                                                     try {
-                                                         Client c = snapshot.getValue(Client.class);
-                                                         userName = c.name;
-                                                        // String n = snapshot.child("nameProduct").getValue(String.class).toString();
-                                                       //  tv5.setText(n);
-                                                        // Log.d("use", userName + n);
-                                                     } catch (Exception e) {
-                                                         e.printStackTrace();
-                                                     }
-                                                 }else{
-                                                     Log.d("use", userName );}
+                                mRef = mRef.child("clients").child(str);
 
-                                                 }
-                                             catch (Exception e){
-                                                 e.printStackTrace();
-                                             }
 
-                                         }
-
-                                         @Override
-                                         public void onCancelled(@NonNull DatabaseError error) {
-
-                                         }
-                                     });
-
-                                     String uid = firebaseAuth.getCurrentUser().getUid();
-                                Appointment app=new Appointment(uid,nameT,date+"  "+keyList.get(pos), userName);
+                                String uid = firebaseAuth.getCurrentUser().getUid();
+                                userEmail = firebaseAuth.getCurrentUser().getEmail();
+                                Appointment app = new Appointment(uid, nameT, date + "  " + keyList.get(pos), userEmail);
                                 String key = mRef.push().getKey();
                                 mRef.getRoot();
                                 mRef = FirebaseDatabase.getInstance().getReference().child("appointments");
@@ -172,6 +150,7 @@ tv5=findViewById(R.id.textView5);
                 alert11.show();
                 //return true;
             }
+        }
         });
 
 

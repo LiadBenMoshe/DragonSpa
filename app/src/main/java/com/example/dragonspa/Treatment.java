@@ -24,7 +24,7 @@ public class Treatment implements Serializable {
         }
         return false;
     }
-    public String toString(){ return "   "+ nameProduct +"  |  " +price;}
+    public String toString(){ return "סוג הטיפול:"+ nameProduct+'\n' +"תיאור:"+detail +'\n' +" מחיר:" +price;}
    public  String getNameProduct(){
         return  nameProduct;
    }
