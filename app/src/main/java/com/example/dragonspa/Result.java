@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class Result extends AppCompatActivity {
-    TextView tv ;
+    TextView tv,tv5 ;
     DatabaseReference mRef;
     ListView listView;
     ArrayList<String> arrayList=new ArrayList<>();
@@ -43,7 +43,7 @@ String idTreat;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         firebaseAuth= FirebaseAuth.getInstance();
-
+tv5=findViewById(R.id.textView5);
         tv=findViewById(R.id.textView2);
         //tv1=findViewById(R.id.textView4);
         Intent i=getIntent();
@@ -62,7 +62,6 @@ String idTreat;
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     for (DataSnapshot ds :snapshot.getChildren()){
-
                         arrayList.add(ds.getKey());
                         arrayAdapter.notifyDataSetChanged();
 
@@ -116,12 +115,13 @@ String idTreat;
                                          @Override
                                          public void onDataChange(@NonNull DataSnapshot snapshot) {
                                              try {
-                                                 if (snapshot.getValue() != null) {
+                                                 if (snapshot.getValue(Client.class) != null) {
                                                      try {
                                                          Client c = snapshot.getValue(Client.class);
                                                          userName = c.name;
-                                                         String n = snapshot.getValue().toString();
-                                                         Log.d("use", userName + n);
+                                                        // String n = snapshot.child("nameProduct").getValue(String.class).toString();
+                                                       //  tv5.setText(n);
+                                                        // Log.d("use", userName + n);
                                                      } catch (Exception e) {
                                                          e.printStackTrace();
                                                      }
@@ -140,7 +140,9 @@ String idTreat;
 
                                          }
                                      });
-                                Appointment app=new Appointment(firebaseAuth.getCurrentUser().getUid(),nameT,date+"  "+keyList.get(pos),userName);
+
+                                     String uid = firebaseAuth.getCurrentUser().getUid();
+                                Appointment app=new Appointment(uid,nameT,date+"  "+keyList.get(pos), userName);
                                 String key = mRef.push().getKey();
                                 mRef.getRoot();
                                 mRef = FirebaseDatabase.getInstance().getReference().child("appointments");
@@ -149,6 +151,11 @@ String idTreat;
                                 arrayList.remove(pos);
                                 arrayAdapter.notifyDataSetChanged();
                                 dialog.cancel();
+                                mRef.getRoot();
+                                mRef = FirebaseDatabase.getInstance().getReference().child("clients").child(uid).child("times");
+                                mRef.child(date).child(keyList.get(pos)).setValue("time");
+
+
                                 Toast.makeText(Result.this, "התור שמור לך", Toast.LENGTH_LONG).show();
                                 startActivity(new Intent(Result.this, SearchFootMas.class));
                             }
