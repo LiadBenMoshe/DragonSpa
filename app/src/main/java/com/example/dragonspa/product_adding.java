@@ -68,6 +68,7 @@ public class product_adding extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot treat : dataSnapshot.getChildren()) {
                             keyList.add(treat.getKey());
+                           // items.add(treat.getValue(Treatment.class).nameProduct);
                             Log.d("key" , treat.getKey());
                             // items.add(treat.getValue(String.class));
                         }

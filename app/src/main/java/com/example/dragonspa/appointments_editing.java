@@ -194,8 +194,8 @@ String userName;
                                             Ref.child("clients").child(value);
 
                                             String[] TO_EMAILS = {userName};
-                                            String subject = "your appointment have been changed";
-                                            String message = "hello,\n" + "your appointment on "+ date +" have been deleted";
+                                            String subject = "your Dragon-Spa appointment have been changed";
+                                            String message = "Hello,\n your appointment on "+ date +" have been deleted.\n please enter our app and choose alternative time.\n sorry for the inconvenience" ;
 
                                             Intent intent = new Intent(Intent.ACTION_SENDTO);
                                             intent.setData(Uri.parse("mailto:"));
@@ -203,7 +203,7 @@ String userName;
                                             intent.putExtra(intent.EXTRA_EMAIL,TO_EMAILS);
                                             intent.putExtra(intent.EXTRA_SUBJECT,subject);
                                             intent.putExtra(intent.EXTRA_TEXT,message);
-                                            startActivity(Intent.createChooser(intent , "choose"));
+                                            startActivity(Intent.createChooser(intent , "don't forget to update the client\n about the change!"));
 
 
 
