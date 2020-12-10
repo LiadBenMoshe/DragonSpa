@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +48,8 @@ public class appointments_editing extends AppCompatActivity {
     int minutes1;
 String value;
 String date;
+String name;
+String userName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,18 +179,36 @@ String date;
                                         if (snapshot.exists()) {
 //                                            Log.d("cccc" , snapshot.getValue(Treatment.class).getNameProduct());
 //                                            Log.d("check" , snapshot.toString() );
+
                                             Log.d("checkkkk" , snapshot.toString() );
                                             date = snapshot.child("date").getValue().toString();
+                                            name = snapshot.child("name").getValue().toString();
+                                            userName = snapshot.child("userName").getValue().toString();
 
                                             value = snapshot.child("userId").getValue().toString();
                                             Log.d("dateee" , "++"+date);
                                             String[] arr = date.split("  ");
                                             Ref  = Ref.getRoot();
                                             Ref.child("clients").child(value).child("times").child(arr[0]).child(arr[1]).removeValue();
+                                            Ref  = Ref.getRoot();
+                                            Ref.child("clients").child(value);
+
+                                            String[] TO_EMAILS = {userName};
+                                            String subject = "your appointment have been changed";
+                                            String message = "hello,\n" + "your appointment on "+ date +" have been deleted";
+
+                                            Intent intent = new Intent(Intent.ACTION_SENDTO);
+                                            intent.setData(Uri.parse("mailto:"));
+
+                                            intent.putExtra(intent.EXTRA_EMAIL,TO_EMAILS);
+                                            intent.putExtra(intent.EXTRA_SUBJECT,subject);
+                                            intent.putExtra(intent.EXTRA_TEXT,message);
+                                            startActivity(Intent.createChooser(intent , "choose"));
+
+
 
                                         }
                                       //  Log.d("checkfail" , snapshot.toString() );
-
 
                                     }
 
