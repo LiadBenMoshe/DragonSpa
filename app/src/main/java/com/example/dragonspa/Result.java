@@ -3,7 +3,6 @@ package com.example.dragonspa;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,7 +44,7 @@ String idTreat;
         firebaseAuth= FirebaseAuth.getInstance();
 
         tv=findViewById(R.id.textView2);
-
+        date = "11-11-1111";
         Intent i=getIntent();
         Bundle b = i.getExtras();
         if(b != null) {

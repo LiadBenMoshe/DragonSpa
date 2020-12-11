@@ -29,7 +29,7 @@ public class SearchFootMas extends AppCompatActivity implements DatePickerDialog
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_foot_mas);
-
+         date = "11-11-1111";
         search = findViewById(R.id.dateSearch);
         displayDate = findViewById(R.id.textView);
 
