@@ -48,7 +48,7 @@ String idTreat;
         Intent i=getIntent();
         Bundle b = i.getExtras();
         if(b != null) {
-             date = i.getExtras().getString("f");
+             date = i.getExtras().getString("date");
              idTreat = i.getExtras().getString("idTreat");
              nameT = i.getExtras().getString("nameT");
         }

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@drawable/beds"
     >
 
@@ -30,15 +32,27 @@
 
 
     <ListView
-        android:id="@+id/listviewtxt111"
+        android:id="@+id/listviewtreat"
         android:layout_width="351dp"
         android:layout_height="432dp"
-        android:background="#8643A0DF"
-        android:cacheColorHint="#3BC1D3"
+
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="45dp"
+        
+        android:listSelector="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.76"></ListView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintVertical_bias="0.76" />
+
+
+</RelativeLayout>

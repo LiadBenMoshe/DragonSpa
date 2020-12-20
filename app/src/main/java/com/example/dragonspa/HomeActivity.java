@@ -1,21 +1,18 @@
 package com.example.dragonspa;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
+import android.os.Handler;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,7 +38,70 @@ public class HomeActivity extends AppCompatActivity {
     ImageButton profile;
     String value;
 
+    ////////
+    DatabaseReference db;
+    FirebaseHelper helper;
+    CustomListAdapter adapter;
+    ListView mL;
 
+    public class FirebaseHelper {
+        DatabaseReference db;
+        ArrayList<Treatment> arrT = new ArrayList<>();
+        Context c;
+        ListView listView2;
+
+        public FirebaseHelper(DatabaseReference db, Context con, ListView mList) {
+            this.db = db;
+            this.c = con;
+            this.listView2 = mList;
+            this.retrieve();
+        }
+
+        public ArrayList<Treatment> retrieve() {
+            db.child("treatments").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    arrT.clear();
+                    if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            Treatment t = ds.getValue(Treatment.class);
+                            arrT.add(t);
+                        }
+                        adapter = new CustomListAdapter(c, arrT);
+                        listView2.setAdapter(adapter);
+                        new Handler().post(new Runnable() {
+                            @Override
+                            public void run() {
+                                listView2.smoothScrollToPosition(arrT.size());
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            return arrT;
+        }
+
+    }
+@Override
+    protected void onCreate(Bundle savedInstanceState){
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_home);
+
+    mL=(ListView)findViewById(R.id.listviewtreat);
+    db=FirebaseDatabase.getInstance().getReference();
+    helper=new FirebaseHelper(db, this,mL);
+
+
+
+}
+
+///////
+/*
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +112,14 @@ public class HomeActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         Reff = database.getReference().child("treatments");
 
+
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
             }
         });
+
         ArrayList<String> keyList = new ArrayList<>();
         Ref = FirebaseDatabase.getInstance().getReference().child("treatments");
         Ref.getRoot().child("treatments")
@@ -70,18 +132,23 @@ public class HomeActivity extends AppCompatActivity {
                             // items.add(treat.getValue(String.class));
                         }
                     }
+*/
+    //     @Override
+    //   public void onCancelled(DatabaseError databaseError) {
+    /*handle errors*/
+    // }
+    // });
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        /*handle errors*/
-                    }
-                });
-
-
+       /*
         Ref = FirebaseDatabase.getInstance().getReference().child("treatments");
-        listView = (ListView) findViewById(R.id.listviewtxt111);
+        listView = (ListView) findViewById(R.id.listviewtreat);
         arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayList);
         listView.setAdapter(arrayAdapter);
+
+
+
+
+
         Ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -138,6 +205,7 @@ public class HomeActivity extends AppCompatActivity {
 
                     }
 
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -150,5 +218,10 @@ public class HomeActivity extends AppCompatActivity {
 
 
         });
+
+        */
+    /////////////////
+
+    ///////////////////
+
     }
-}

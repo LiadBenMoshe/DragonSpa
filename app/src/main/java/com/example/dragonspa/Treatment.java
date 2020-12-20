@@ -34,4 +34,5 @@ public class Treatment implements Serializable {
     public  long getPrice(){
         return  price;
     }
+
 }

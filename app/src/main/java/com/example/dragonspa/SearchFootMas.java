@@ -4,24 +4,35 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.TextView;
+import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SearchFootMas extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     Button search,gotoResult;
-    TextView displayDate;
+    //TextView displayDate;
+    ListView displayDate;
     String idTreat ="";
     String nameT;
     String date;
     DatabaseReference Ref;
+    ArrayList<String> arrayList=new ArrayList<>();
+    ArrayAdapter<String> arrayAdapter;
+    ArrayList<String> keyList = new ArrayList<>();
 
 
 
@@ -31,7 +42,8 @@ public class SearchFootMas extends AppCompatActivity implements DatePickerDialog
         setContentView(R.layout.activity_search_foot_mas);
          date = "11-11-1111";
         search = findViewById(R.id.dateSearch);
-        displayDate = findViewById(R.id.textView);
+        displayDate=findViewById(R.id.DateList);
+       // displayDate = findViewById(R.id.textView);
 
         gotoResult=findViewById(R.id.textView3);
         Intent i = getIntent();
@@ -52,51 +64,67 @@ public class SearchFootMas extends AppCompatActivity implements DatePickerDialog
 
             }
         });
-
-      /* display.setOnClickListener(new View.OnClickListener() {
+        arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
+        displayDate.setAdapter(arrayAdapter);
+        Ref=FirebaseDatabase.getInstance().getReference().child("treatments");
+        Ref.getRoot().child("treatments").child(idTreat).child("times").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    for (DataSnapshot ds :snapshot.getChildren()){
+                        arrayList.add(ds.getKey()); // מציג את התאריכים הקיימים
+                        arrayAdapter.notifyDataSetChanged();
+
+
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        Ref.getRoot().child("treatments").child(idTreat).child("times")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot time : dataSnapshot.getChildren()) {
+                            keyList.add(time.getKey());
+
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        /*handle errors*/
+                    }
+                });
+        displayDate.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String date=keyList.get(position);
                 Intent i=new Intent(SearchFootMas.this,Result.class);
                 i.putExtra("date",date);
-               startActivity(i);
+                i.putExtra("idTreat" , idTreat);
+                i.putExtra("nameT",nameT);
+                startActivity(i);
             }
-        });*/
+        });
+
+
        gotoResult.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
 
                Intent i=new Intent(SearchFootMas.this,Result.class);
-               i.putExtra("f",date);
+               i.putExtra("date",date);
                i.putExtra("idTreat" , idTreat);
                i.putExtra("nameT",nameT);
                    startActivity(i);
 
-               /* Ref=FirebaseDatabase.getInstance().getReference().child("treatments/times").child(date);
-               Ref.getRoot().child("treatments").child("-MNxdhX4rS7Fb-be7ZFt").child("times").child(date).addListenerForSingleValueEvent(new ValueEventListener() {
-                   @Override
-                   public void onDataChange(@NonNull DataSnapshot snapshot) {
-                       if(snapshot.exists()){
-                           for (DataSnapshot ds :snapshot.getChildren()){
 
-                               arrayList.add(ds.getKey());
-                               arrayAdapter.notifyDataSetChanged();
-
-
-                           }
-                       }
-                       else{
-                           arrayList.add("אין תוצאות מתאימות");
-                           arrayAdapter.notifyDataSetChanged();
-                       }
-
-                   }
-
-                   @Override
-                   public void onCancelled(@NonNull DatabaseError error) {
-                         arrayAdapter.clear();
-                         arrayList.clear();
-                   }
-               });*/
 
            }
        });
@@ -122,7 +150,7 @@ public class SearchFootMas extends AppCompatActivity implements DatePickerDialog
         @Override
         public void onDateSet (DatePicker view,int year, int month, int dayOfMonth){
             date = dayOfMonth + "-" + (month + 1) + "-" + year;
-            displayDate.setText(date);
+            //displayDate.setText(date);
 
 
         }
