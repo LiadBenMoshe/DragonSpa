@@ -31,8 +31,8 @@ public class Treatment implements Serializable {
     public  String getDetail(){
         return  detail;
     }
-    public  long getPrice(){
-        return  price;
+    public  String getPrice(){
+        return  price+"$";
     }
 
 }

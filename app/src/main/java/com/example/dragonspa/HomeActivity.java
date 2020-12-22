@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
     Intent i;
     FirebaseDatabase database;
     FirebaseAuth mFirebaseAuth;
-    ScrollView scrollView;
+
     ListView listView;
     ArrayList<String> arrayList = new ArrayList<>();
     ArrayAdapter<String> arrayAdapter;
@@ -42,7 +42,8 @@ public class HomeActivity extends AppCompatActivity {
     DatabaseReference db;
     FirebaseHelper helper;
     CustomListAdapter adapter;
-    ListView mL;
+    ListView LView;
+
 
     public class FirebaseHelper {
         DatabaseReference db;
@@ -92,9 +93,18 @@ public class HomeActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_home);
 
-    mL=(ListView)findViewById(R.id.listviewtreat);
+    LView=(ListView)findViewById(R.id.listviewtreat);
     db=FirebaseDatabase.getInstance().getReference();
-    helper=new FirebaseHelper(db, this,mL);
+    helper=new FirebaseHelper(db, this,LView);
+
+    profile = (ImageButton) findViewById(R.id.ActionButton);
+    profile.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
+        }
+    });
+
 
 
 

@@ -15,7 +15,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="103dp"
+        android:layout_height="wrap_content"
+        android:background="#64FFFFFF"
         android:orientation="vertical">
 
         <TextView
@@ -24,18 +25,16 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-
             android:text="Main Title"
             android:textColor="@color/black"
             android:textSize="20sp"
-
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/subTitle"
             android:layout_width="361dp"
-            android:layout_height="44dp"
+            android:layout_height="38dp"
 
             android:layout_margin="5dp"
             android:text="Sub Title"
@@ -46,6 +45,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mainTitle" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="0dp"
+            android:text="price"
+
+            android:textStyle="italic" />
+
+        <Button
+            android:id="@+id/searchDate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="10dp"
+            android:text="בוא להתפנק"
+            android:textSize="8sp" />
+
 
     </LinearLayout>
 

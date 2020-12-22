@@ -1,15 +1,12 @@
 package com.example.dragonspa;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -75,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
                for (DataSnapshot ds : snapshot.getChildren()) {
 
                     if(ds.getValue().equals(uid)) {
-                        String registerEventName = snapshot.child("name").getValue().toString();
+                        String registerEventName = snapshot.child("userId").getValue().toString();
                         registerEventName=registerEventName+"  "+snapshot.child("date").getValue().toString();
                         stringArrayList.add(registerEventName);
                         adapter.notifyDataSetChanged();
