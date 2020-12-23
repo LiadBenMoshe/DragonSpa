@@ -35,7 +35,7 @@ public class manager_main_menu extends AppCompatActivity {
         stock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(manager_main_menu.this,stock_view.class));
+
             }
         });
     }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F1EEEE"
     android:backgroundTint="#F8F5F5"
-    tools:context=".SearchFootMas">
+    tools:context=".ShowDateMassage">
 
     <Button
         android:id="@+id/dateSearch"

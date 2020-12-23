@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class SearchFootMas extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class ShowDateMassage extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     Button search,gotoResult;
     //TextView displayDate;
     ListView displayDate;
@@ -105,7 +105,7 @@ public class SearchFootMas extends AppCompatActivity implements DatePickerDialog
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String date=keyList.get(position);
-                Intent i=new Intent(SearchFootMas.this,Result.class);
+                Intent i=new Intent(ShowDateMassage.this,Result.class);
                 i.putExtra("date",date);
                 i.putExtra("idTreat" , idTreat);
                 i.putExtra("nameT",nameT);
@@ -118,7 +118,7 @@ public class SearchFootMas extends AppCompatActivity implements DatePickerDialog
            @Override
            public void onClick(View v) {
 
-               Intent i=new Intent(SearchFootMas.this,Result.class);
+               Intent i=new Intent(ShowDateMassage.this,Result.class);
                i.putExtra("date",date);
                i.putExtra("idTreat" , idTreat);
                i.putExtra("nameT",nameT);

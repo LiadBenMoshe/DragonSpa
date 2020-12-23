@@ -134,7 +134,7 @@ String idTreat;
 
 
                                 Toast.makeText(Result.this, "התור שמור לך", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(Result.this, SearchFootMas.class));
+                                startActivity(new Intent(Result.this, ShowDateMassage.class));
                             }
                         });
 

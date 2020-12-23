@@ -88,7 +88,7 @@ this.arrT=arrt;
         @Override
         public void onClick(View v) {
           String idTreat= keyList.get(position);
-          Intent i=new Intent(c,SearchFootMas.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+          Intent i=new Intent(c,ShowDateMassage.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
           i.putExtra("idTreat", idTreat);
           Log.d("check" , idTreat );
           c.startActivity(i);

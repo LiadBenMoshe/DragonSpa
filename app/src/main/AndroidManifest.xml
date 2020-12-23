@@ -17,7 +17,6 @@
         <activity android:name=".product_adding2" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".stock_view" />
         <activity android:name=".appointments_editing" />
         <activity android:name=".product_adding" />
         <activity android:name=".manager_main_menu" />
