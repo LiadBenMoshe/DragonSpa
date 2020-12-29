@@ -52,6 +52,7 @@ String idTreat;
              idTreat = i.getExtras().getString("idTreat");
              nameT = i.getExtras().getString("nameT");
         }
+
         listView=findViewById(R.id.searchsList);
         arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
         listView.setAdapter(arrayAdapter);
@@ -111,7 +112,9 @@ String idTreat;
                             public synchronized void onClick(DialogInterface dialog, int id) {
                                 mRef = mRef.getRoot();
                                 mRef.child("treatments").child(idTreat).child("times").child(date).child(keyList.get(pos)).removeValue();
+
                                 mRef = FirebaseDatabase.getInstance().getReference().child("appointments");
+
                                 String str = firebaseAuth.getCurrentUser().getUid();
                                 mRef = mRef.getRoot();
                                 mRef = mRef.child("clients").child(str);
@@ -119,7 +122,7 @@ String idTreat;
 
                                 String uid = firebaseAuth.getCurrentUser().getUid();
                                 userEmail = firebaseAuth.getCurrentUser().getEmail();
-                                Appointment app = new Appointment(uid, nameT, date + "  " + keyList.get(pos), userEmail);
+                                Appointment app = new Appointment(uid, nameT, date + "  " + keyList.get(pos), userEmail,idTreat,nameT);
                                 String key = mRef.push().getKey();
                                 mRef.getRoot();
                                 mRef = FirebaseDatabase.getInstance().getReference().child("appointments");

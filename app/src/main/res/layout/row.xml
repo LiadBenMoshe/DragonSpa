@@ -10,13 +10,15 @@
     android:layout_marginBottom="20dp"
     android:scrollbars="vertical"
     app:cardCornerRadius="20dp"
+
     >
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#64FFFFFF"
+        android:background="@android:color/transparent"
+        android:cacheColorHint="@null"
         android:orientation="vertical">
 
         <TextView

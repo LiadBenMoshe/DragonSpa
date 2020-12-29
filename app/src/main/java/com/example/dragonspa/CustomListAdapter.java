@@ -80,6 +80,7 @@ this.arrT=arrt;
       TextView price=convertView.findViewById(R.id.price);
       Button searchDate=convertView.findViewById(R.id.searchDate);
 
+
       final  Treatment f=(Treatment)this.getItem(position);
       main.setText(f.getNameProduct());
       sub.setText(f.getDetail());
@@ -90,6 +91,7 @@ this.arrT=arrt;
           String idTreat= keyList.get(position);
           Intent i=new Intent(c,ShowDateMassage.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
           i.putExtra("idTreat", idTreat);
+          i.putExtra("treatName",f.getNameProduct());
           Log.d("check" , idTreat );
           c.startActivity(i);
         }
