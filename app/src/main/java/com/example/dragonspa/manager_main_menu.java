@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class manager_main_menu extends AppCompatActivity {
-    private TextView addProduct, editAppointments, stock;
+    private TextView addProduct, editAppointments;
     FirebaseDatabase mDatabase;
     DatabaseReference dbRootRef;
 
@@ -32,16 +32,10 @@ public class manager_main_menu extends AppCompatActivity {
                 startActivity(new Intent(manager_main_menu.this,appointments_editing.class));
             }
         });
-        stock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
     }
     private void setupUIviews() {
         addProduct = (TextView) findViewById(R.id.addProduct);
         editAppointments= (TextView) findViewById(R.id.editAppointments);
-        stock = (TextView) findViewById(R.id.stock);
     }
 }

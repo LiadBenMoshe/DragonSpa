@@ -21,22 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.409"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addAppointmentButton"
-        android:layout_width="71dp"
-        android:layout_height="60dp"
-        android:backgroundTint="#0E30B5"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.974"
-        app:srcCompat="@android:drawable/ic_menu_add"
-        android:contentDescription="@string/todo"
-        android:focusable="true" />
-
     <TextView
         android:id="@+id/editApnt"
         android:layout_width="157dp"

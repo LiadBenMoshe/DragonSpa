@@ -1,7 +1,5 @@
 package com.example.dragonspa;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,9 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.ListView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,7 +28,7 @@ import java.util.Calendar;
 
 public class appointments_editing extends AppCompatActivity {
     ArrayList<Treatment> treats = new ArrayList<>();
-    private FloatingActionButton add;
+    //private FloatingActionButton add;
     DatabaseReference Ref;
     FirebaseDatabase database;
 
@@ -56,12 +51,6 @@ String userName;
         setContentView(R.layout.activity_appointments_editing);
         setupUIviews();
         database = FirebaseDatabase.getInstance();
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(appointments_editing.this, appointment_editing2.class));
-            }
-        });
         Ref= FirebaseDatabase.getInstance().getReference().child("appointments");
         listView=(ListView)findViewById(R.id.listviewtxt2);
         arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
@@ -114,49 +103,50 @@ String userName;
 
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
-
-                systemCalender=Calendar.getInstance();
-                TimePickerDialog timePickerDialog = new TimePickerDialog(appointments_editing.this, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        hour1  = hourOfDay;
-                        minutes1 = minute;
-
-                        String s = day1+"-"+month1+"-"+year1;
-                        String s2 = "";
-                        s2 = hour1+":"+minutes1;
-                        if(hour1 < 10) {
-                            s2 = "0" + hour1 + ":" + minutes1;
-                        }
-                        if((minutes1 < 10)) {
-                            s2 = hour1 + ":0" + minutes1;
-                        }
-                        if(hour1 < 10 && minutes1 < 10){
-                            s2 = "0" + hour1 + ":0" + minutes1;
-                        }
-                        Ref  = Ref.getRoot();
-                        Ref =  Ref.child("appointments").child(keyList.get(pos)).child("time");
-                        Ref.child(s).child(s2).setValue("time");
-                        Toast.makeText(appointments_editing.this, "edited successfully", Toast.LENGTH_LONG).show();
-
-                    }
-                },hour1,minutes1,true);
-                timePickerDialog.show();
-
-                DatePickerDialog datePickerDialog=new DatePickerDialog(appointments_editing.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        year1 = year;
-                        month1 = month+1;
-                        day1 = dayOfMonth;
-                    }
-                },year1 , month1, day1);
-                datePickerDialog.show();
-
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+//
+//                systemCalender=Calendar.getInstance();
+//
+//                TimePickerDialog timePickerDialog = new TimePickerDialog(appointments_editing.this, new TimePickerDialog.OnTimeSetListener() {
+//                    @Override
+//                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+//                        hour1  = hourOfDay;
+//                        minutes1 = minute;
+//
+//                        String s = day1+"-"+month1+"-"+year1;
+//                        String s2 = "";
+//                        s2 = hour1+":"+minutes1;
+//                        if(hour1 < 10) {
+//                            s2 = "0" + hour1 + ":" + minutes1;
+//                        }
+//                        if((minutes1 < 10)) {
+//                            s2 = hour1 + ":0" + minutes1;
+//                        }
+//                        if(hour1 < 10 && minutes1 < 10){
+//                            s2 = "0" + hour1 + ":0" + minutes1;
+//                        }
+//                        Ref  = Ref.getRoot();
+//                        Ref =  Ref.child("appointments").child(keyList.get(pos)).child("time");
+//                        Ref.child(s).child(s2).setValue("time");
+//                        Toast.makeText(appointments_editing.this, "edited successfully", Toast.LENGTH_LONG).show();
+//
+//                    }
+//                },hour1,minutes1,true);
+//                timePickerDialog.show();
+//
+//                DatePickerDialog datePickerDialog=new DatePickerDialog(appointments_editing.this, new DatePickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                        year1 = year;
+//                        month1 = month+1;
+//                        day1 = dayOfMonth;
+//                    }
+//                },year1 , month1, day1);
+//                datePickerDialog.show();
+//
+//            }
+//        });
 
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -245,7 +235,6 @@ String userName;
     }
 
     private void setupUIviews() {
-        add = (FloatingActionButton) findViewById(R.id.addAppointmentButton);
     }
 }
 
