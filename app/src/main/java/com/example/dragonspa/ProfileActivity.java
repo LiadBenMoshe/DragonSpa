@@ -69,15 +69,18 @@ public class ProfileActivity extends AppCompatActivity {
            @Override
            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                for (DataSnapshot ds : snapshot.getChildren()) {
+      if(ds.exists()) {
+          if (ds.getValue().equals(uid)) {
+              //if(snapshot.child("date"))
+              String registerEventName;
+              String nameT = snapshot.child("name").getValue().toString();
 
-                    if(ds.getValue().equals(uid)) {
-                        String registerEventName = snapshot.child("userId").getValue().toString();
-                        registerEventName=registerEventName+"  "+snapshot.child("date").getValue().toString();
-                        stringArrayList.add(registerEventName);
-                        adapter.notifyDataSetChanged();
-                    }
+              registerEventName = nameT + " - " + snapshot.child("date").getValue().toString();
+              stringArrayList.add(registerEventName);
+              adapter.notifyDataSetChanged();
+          }
 
-
+      }
 
                }
            }
@@ -145,19 +148,22 @@ public class ProfileActivity extends AppCompatActivity {
                                         if (snapshot.exists()) {
 //                                            Log.d("cccc" , snapshot.getValue(Treatment.class).getNameProduct());
 //                                            Log.d("check" , snapshot.toString() );
-
+                                            String treat=snapshot.child("treatID").getValue().toString();
                                             Log.d("checkkkk" , snapshot.toString() );
                                             date = snapshot.child("date").getValue().toString();
-                                            name = snapshot.child("name").getValue().toString();
+
                                             userName = snapshot.child("userName").getValue().toString();
 
                                             value = snapshot.child("userId").getValue().toString();
                                             Log.d("dateee" , "++"+date);
                                             String[] arr = date.split("  ");
+
+                                            Log.d("arrCheck" , arr[0]);
                                             Ref  = Ref.getRoot();
                                             Ref.child("clients").child(value).child("times").child(arr[0]).child(arr[1]).removeValue();
-                                            Ref  = Ref.getRoot();
-                                            Ref.child("clients").child(value);
+
+                                            Ref  = FirebaseDatabase.getInstance().getReference().child("treatments");
+                                            Ref.child(treat).child("times").child(arr[0]).child(arr[1]).setValue("time");
 
 
 

@@ -12,7 +12,8 @@
         android:theme="@style/Theme.DragonSpa">
         <activity android:name=".ConnectUs"></activity>
         <activity android:name=".appointment_editing2" />
-        <activity android:name=".Result" />
+        <activity android:name=".Result"
+            android:parentActivityName=".HomeActivity"/>
         <activity android:name=".ShowDateMassage" />
         <activity android:name=".product_adding2" />
         <activity android:name=".ProfileActivity" />

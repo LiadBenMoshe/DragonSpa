@@ -23,38 +23,21 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.263" />
 
     <TextView
         android:id="@+id/editAppointments"
         android:layout_width="188dp"
         android:layout_height="85dp"
+        android:layout_marginTop="84dp"
         android:background="#8D348AB8"
+
         android:text="@string/edit_appointments"
-
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/stock"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addProduct"
-        app:layout_constraintVertical_bias="0.466" />
-
-    <TextView
-        android:id="@+id/stock"
-        android:layout_width="188dp"
-        android:layout_height="85dp"
-        android:background="#8D499CDD"
-        android:text="@string/stock"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.527" />
+        app:layout_constraintTop_toBottomOf="@+id/addProduct" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

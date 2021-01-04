@@ -2,8 +2,11 @@ package com.example.dragonspa;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -11,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -52,8 +56,20 @@ String idTreat;
              idTreat = i.getExtras().getString("idTreat");
              nameT = i.getExtras().getString("nameT");
         }
+
         listView=findViewById(R.id.searchsList);
-        arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
+        arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList){
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                TextView item=(TextView) super.getView(position, convertView, parent);
+
+                item.setTypeface(item.getTypeface(), Typeface.BOLD);
+                item.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
+
+                return item;
+            }
+        };
         listView.setAdapter(arrayAdapter);
         mRef=FirebaseDatabase.getInstance().getReference().child("treatments/times").child(date);
         mRef.getRoot().child("treatments").child(idTreat).child("times").child(date).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -111,7 +127,9 @@ String idTreat;
                             public synchronized void onClick(DialogInterface dialog, int id) {
                                 mRef = mRef.getRoot();
                                 mRef.child("treatments").child(idTreat).child("times").child(date).child(keyList.get(pos)).removeValue();
+
                                 mRef = FirebaseDatabase.getInstance().getReference().child("appointments");
+
                                 String str = firebaseAuth.getCurrentUser().getUid();
                                 mRef = mRef.getRoot();
                                 mRef = mRef.child("clients").child(str);
@@ -119,7 +137,7 @@ String idTreat;
 
                                 String uid = firebaseAuth.getCurrentUser().getUid();
                                 userEmail = firebaseAuth.getCurrentUser().getEmail();
-                                Appointment app = new Appointment(uid, nameT, date + "  " + keyList.get(pos), userEmail);
+                                Appointment app = new Appointment(uid, nameT, date + "  " + keyList.get(pos), userEmail,idTreat);
                                 String key = mRef.push().getKey();
                                 mRef.getRoot();
                                 mRef = FirebaseDatabase.getInstance().getReference().child("appointments");

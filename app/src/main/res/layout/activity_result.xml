@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+android:background="@drawable/beauti"
     tools:context=".Result">
     <TextView
         android:id="@+id/textView2"
         android:layout_width="145dp"
         android:layout_height="35dp"
         android:text="תוצאות חיפוש:"
+        android:textStyle="bold"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.458"

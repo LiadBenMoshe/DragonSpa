@@ -4,19 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".ProfileActivity"
+    android:background="@drawable/beauti">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="187dp"
         android:layout_height="0dp"
         android:layout_marginStart="210dp"
-        android:layout_marginTop="154dp"
+        android:layout_marginTop="168dp"
         android:layout_marginEnd="15dp"
         android:text="הטיפולים שלי"
         android:textSize="24sp"
         app:drawableTint="#673AB7"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -112,6 +112,9 @@ public class product_adding extends AppCompatActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
 
                 systemCalender=Calendar.getInstance();
+                int year = systemCalender.get(Calendar.YEAR);
+                int month = systemCalender.get(Calendar.MONTH);
+                int day = systemCalender.get(Calendar.DAY_OF_MONTH);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(product_adding.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -148,7 +151,7 @@ public class product_adding extends AppCompatActivity {
                         month1 = month+1;
                         day1 = dayOfMonth;
                     }
-                },year1 , month1, day1);
+                },year , month, day);
                 datePickerDialog.show();
 
             }
