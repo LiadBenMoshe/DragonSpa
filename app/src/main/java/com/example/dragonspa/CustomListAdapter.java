@@ -84,7 +84,7 @@ this.arrT=arrt;
       final  Treatment f=(Treatment)this.getItem(position);
       main.setText(f.getNameProduct());
       sub.setText(f.getDetail());
-      price.setText(f.getPrice());
+      price.setText(f.getPrice()+"$");
       searchDate.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {

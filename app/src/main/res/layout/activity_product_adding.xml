@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9C27B0"
-    android:backgroundTint="#FFFFFF"
     android:clipToPadding="false"
+    android:background="@drawable/beauti"
+
     tools:context=".product_adding">
 
     <ListView
