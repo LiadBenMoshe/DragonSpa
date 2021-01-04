@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
     ListView LView;
 
 
-    public class FirebaseHelper {
+    public  class FirebaseHelper {
         DatabaseReference db;
         ArrayList<Treatment> arrT = new ArrayList<>();
         Context c;

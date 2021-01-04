@@ -1,22 +1,16 @@
 package com.example.dragonspa;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.DatePicker;
 import android.widget.ListView;
-import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -44,6 +38,53 @@ public class product_adding extends AppCompatActivity {
     int hour1;
     int minutes1;
 
+    product_adding.FirebaseHelper helper;
+    CustomListAdapterM adapter;
+    public  class FirebaseHelper {
+        DatabaseReference db;
+        ArrayList<Treatment> arrT = new ArrayList<>();
+        Context c;
+        ListView listView2;
+
+        public FirebaseHelper(DatabaseReference db, Context con, ListView mList) {
+            this.db = db;
+            this.c = con;
+            this.listView2 = mList;
+            this.retrieve();
+        }
+
+        public ArrayList<Treatment> retrieve() {
+            db.child("treatments").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    arrT.clear();
+                    if (snapshot.exists() && snapshot.getChildrenCount() > 0) {
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            Treatment t = ds.getValue(Treatment.class);
+                            arrT.add(t);
+                        }
+                        adapter = new CustomListAdapterM(c, arrT);
+                        listView2.setAdapter(adapter);
+                        new Handler().post(new Runnable() {
+                            @Override
+                            public void run() {
+                                listView2.smoothScrollToPosition(arrT.size());
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+            return arrT;
+        }
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +96,13 @@ public class product_adding extends AppCompatActivity {
                 startActivity(new Intent(product_adding.this, product_adding2.class));
             }
         });
-        Ref= FirebaseDatabase.getInstance().getReference().child("treatments");
+        Ref= FirebaseDatabase.getInstance().getReference();
         listView=(ListView)findViewById(R.id.listviewtxt);
+        ///
+        helper=new product_adding.FirebaseHelper(Ref, this,listView);
+        ////
+
+
         arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
         listView.setAdapter(arrayAdapter);
 
@@ -108,7 +154,7 @@ public class product_adding extends AppCompatActivity {
 
             }
         });
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int pos, long id) {
 
                 systemCalender=Calendar.getInstance();
@@ -191,7 +237,7 @@ public class product_adding extends AppCompatActivity {
                 alert11.show();
                 return true;
             }
-        });
+        });*/
     }
 
     private void setupUIviews() {
