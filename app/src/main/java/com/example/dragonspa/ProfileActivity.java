@@ -69,17 +69,18 @@ public class ProfileActivity extends AppCompatActivity {
            @Override
            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                for (DataSnapshot ds : snapshot.getChildren()) {
+      if(ds.exists()) {
+          if (ds.getValue().equals(uid)) {
+              //if(snapshot.child("date"))
+              String registerEventName;
+              String nameT = snapshot.child("name").getValue().toString();
 
-                    if(ds.getValue().equals(uid)) {
-                        String registerEventName ;
-                        String nameT=snapshot.child("treatName").getValue().toString();
+              registerEventName = nameT + " - " + snapshot.child("date").getValue().toString();
+              stringArrayList.add(registerEventName);
+              adapter.notifyDataSetChanged();
+          }
 
-                        registerEventName=nameT+"  "+snapshot.child("date").getValue().toString();
-                        stringArrayList.add(registerEventName);
-                        adapter.notifyDataSetChanged();
-                    }
-
-
+      }
 
                }
            }

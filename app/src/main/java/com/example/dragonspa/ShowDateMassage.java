@@ -2,14 +2,20 @@ package com.example.dragonspa;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +39,8 @@ public class ShowDateMassage extends AppCompatActivity implements DatePickerDial
     ArrayAdapter<String> arrayAdapter;
     ArrayList<String> keyList = new ArrayList<>();
 
+    Typeface mTypeface;
+
 
 
     @Override
@@ -41,10 +49,11 @@ public class ShowDateMassage extends AppCompatActivity implements DatePickerDial
         setContentView(R.layout.activity_search_foot_mas);
         // date = "11-11-1111";
        // search = findViewById(R.id.dateSearch);
+        // displayDate = findViewById(R.id.textView);
+          // gotoResult=findViewById(R.id.textView3);
         displayDate=findViewById(R.id.DateList);
-       // displayDate = findViewById(R.id.textView);
 
-       // gotoResult=findViewById(R.id.textView3);
+
         Intent i = getIntent();
         Bundle b =i.getExtras();
         if(b  != null) {
@@ -55,15 +64,19 @@ public class ShowDateMassage extends AppCompatActivity implements DatePickerDial
 
         Ref=FirebaseDatabase.getInstance().getReference("treatments/times");
 
-       /* search.setOnClickListener(new View.OnClickListener() {
+
+        arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList){
+            @NonNull
             @Override
-            public void onClick(View v) {
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                TextView item=(TextView) super.getView(position, convertView, parent);
 
-                showData();
+                item.setTypeface(item.getTypeface(), Typeface.BOLD);
+                item.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
 
+                return item;
             }
-        });*/
-        arrayAdapter= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,arrayList);
+        };
         displayDate.setAdapter(arrayAdapter);
         Ref=FirebaseDatabase.getInstance().getReference().child("treatments");
         Ref.getRoot().child("treatments").child(idTreat).child("times").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -74,7 +87,10 @@ public class ShowDateMassage extends AppCompatActivity implements DatePickerDial
                         //אנחנו מציגים ללקוח רק את התאריכים העתידיים
                         String dateList=ds.getKey();
                         String [] dateArr =dateList.split("-");
-                        if(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)<Integer.parseInt(dateArr[0]) && Calendar.getInstance().get(Calendar.MONTH)<Integer.parseInt(dateArr[1]) ){
+                        if(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)<Integer.parseInt(dateArr[0])
+                                && Calendar.getInstance().get(Calendar.MONTH)<=Integer.parseInt(dateArr[1])
+                               &&Calendar.getInstance().get(Calendar.YEAR)<=Integer.parseInt(dateArr[2])
+                        ){
                             arrayList.add(ds.getKey()); // מציג את התאריכים הקיימים
                             arrayAdapter.notifyDataSetChanged();
                         }
@@ -100,7 +116,11 @@ public class ShowDateMassage extends AppCompatActivity implements DatePickerDial
 
                             String dateList=time.getKey();
                             String [] dateArr =dateList.split("-");
-                            if(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)<Integer.parseInt(dateArr[0]) && Calendar.getInstance().get(Calendar.MONTH)<Integer.parseInt(dateArr[1]) ) {
+                            Log.d("fgfgfg:", dateArr[2]);
+                            if(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)<Integer.parseInt(dateArr[0])
+                                    && Calendar.getInstance().get(Calendar.MONTH)<=Integer.parseInt(dateArr[1])
+                                    &&Calendar.getInstance().get(Calendar.YEAR)<=Integer.parseInt(dateArr[2])
+                            ) {
                                 keyList.add(time.getKey());
 //
                             }
@@ -124,23 +144,7 @@ public class ShowDateMassage extends AppCompatActivity implements DatePickerDial
             }
         });
 
-/*
-       gotoResult.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
 
-               Intent i=new Intent(ShowDateMassage.this,Result.class);
-               i.putExtra("date",date);
-               i.putExtra("idTreat" , idTreat);
-               i.putExtra("nameT",nameT);
-                   startActivity(i);
-
-
-
-           }
-       });
-
-*/
 
 }
 
