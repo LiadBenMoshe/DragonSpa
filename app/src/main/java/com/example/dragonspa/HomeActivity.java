@@ -129,7 +129,7 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Belive in Yourself, that`s the only help", Toast.LENGTH_LONG).show();
                 return true;
             case R.id.item3:
-                Toast.makeText(this, "Item 3 selected", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeActivity.this, MainActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
